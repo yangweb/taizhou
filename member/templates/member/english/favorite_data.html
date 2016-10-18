@@ -1,0 +1,7 @@
+{loop $list $t}
+<tr id="man_row_{$t.id}">
+	<td class="algin_r"><input type="checkbox" value="{$t.id}" class="man_select" name="ids[]"></td>
+	<td class="algin_l"><a href="{$t.url}" title="{$t.title}" target="_blank">{$t.title}</a></td>
+	<td class="algin_l">{man_date($t.inputtime, '', 'red')}</td>
+</tr>
+{/loop}

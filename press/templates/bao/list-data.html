@@ -1,0 +1,23 @@
+<section>
+    <div class="page row">
+        {template "data/page-sidebar.html"}
+        <div class="media-articles-list-content">
+            {php $cname = $ci->get_cache('module-1-press', 'category', $catid, 'name');}
+            <h1 class="page-title">{if $cname}{$cname}{else}{MODULE_NAME}{/if}稿</h1>
+            <div class="media-articles-list">
+                {list action=module catid=$catid field=title,url,updatetime,description order=updatetime page=1}
+                <div class="media-article">
+                    <a class="media-article__link" href="{$t.url}">{$t.title}</a>
+                    <div class="media-article__metadata">
+                        <span class="caption bold"></span>
+                        <span class="caption">{man_date($t._updatetime,NULL,'')}</span>
+                    </div>
+                </div>
+                {/list}
+            </div>
+
+
+        </div>
+    </div>
+
+</section>

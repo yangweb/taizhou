@@ -1,0 +1,25 @@
+<div class="side-drawer">
+    <ul class="side-drawer__nav">
+        {list action=cache name=module order=displayorder}
+        {if $t.dirname=='press'}{else}
+        <li class="side-drawer__item" >
+            <a class="side-drawer__link" href="{$t.url}">{$t.name}</a>
+        </li>
+        {/if}
+        {/list}
+        <li class="side-drawer__item">
+            <a class="side-drawer__link" href="{$ci->get_cache('page-1', 'data', 'index', 1, 'url')}">关于</a>
+            <ul class="side-drawer__sublinks">
+                {list action=page module=index pid=1}
+                <li class="side-drawer__sublink">
+                    <a href="{$t.url}">{$t.title}</a>
+                </li>
+                {/list}
+            </ul>
+        </li>
+    </ul>
+    <!--<ul class="side-secondary-nav">
+        <li><a href="">English</a></li>
+    </ul>-->
+</div>
+<div class="side-drawer__close"></div>

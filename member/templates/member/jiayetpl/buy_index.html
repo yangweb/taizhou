@@ -1,0 +1,51 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+	$(".msearch a").click(function(){
+		var name = $(this).attr("name");
+		$(".msearch a").removeClass("cur");
+		$(this).addClass("cur");
+		$("#man_order").val(name);
+	});
+	$("#man_loadmore a").click(function(){
+		var page = $("#man_page").val();
+		$("#man_loading").html("<div style='padding:30px;text-align:center;'><img src='{MEMBER_THEME_PATH}images/loading.gif' /></div>");
+		$.get("{$moreurl}", {page:page}, function(data){
+			if (data != "null") {
+				$("#man_body").append(data);
+				$("#man_page").val(Number(page) + 1);
+			}
+			$("#man_loading").html("");
+		});
+	});
+});
+</script>
+<input name="page" id="man_page" type="hidden" value="2" />
+<div class="content clearfix">
+	{template navigator.html}
+    <div class="article">
+        <div class="section">
+            <div class="title"><strong>{$meta_name}</strong></div>
+            <div class="main man_table">
+                <form action="" method="post" name="myform" id="myform" style="margin-bottom:15px;">
+                <input name="action" id="action" type="hidden" value="" />
+				<table style="table-layout:fixed;margin-bottom: 0;">
+				<thead>
+					<tr>
+						<th class="algin_l">主题</th>
+						<th style="width:80px;" class="algin_c">{SITE_SCORE}</th>
+						<th style="width:120px;" class="algin_l">购买时间</th>
+					</tr>
+				</thead>
+				<tbody id="man_body">
+				{template buy_data.html}
+				</tbody>
+				</table>
+                </form>
+				<div id="man_loading"></div>
+                <div id="man_loadmore" class="load-more"><a href="javascript:;">查 看 更 多</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{template footer.html}

@@ -1,0 +1,59 @@
+{template "header.html"}
+<link href="{MEMBER_THEME_PATH}sns/sns.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+    // 加载更多
+    $("#man_loadmore a").click(function(){
+        var page = $("#man_page").val();
+        $("#man_loading").html("<div style='padding:30px;text-align:center;'><img src='{MEMBER_THEME_PATH}images/loading.gif' /></div>");
+        $.get("{$moreurl}", {page:page}, function(data){
+            if (data != "null") {
+                $("#man_body").append(data);
+                $("#man_page").val(Number(page) + 1);
+            }
+            $("#man_loading").html("");
+        });
+    });
+    // 取消关注按钮
+    $('.man_follow_btn_span').hover(function(){
+        $(this).html('<b class="ico-minus-gray"></b>取消关注');
+    },function(){
+        var value = $(this).attr('value');
+        if (value == 1) {
+            $(this).html('<b class="ico-connect"></b>相互关注');
+        } else {
+            $(this).html('<b class="ico-already"></b>已关注');
+        }
+    });
+    // 取消关注操作
+    $('.man_follow_btn').click(function(){
+        var id = $(this).attr('fid');
+        var uid = $(this).attr('uid');
+        $.get("{man_member_url('sns/follow_delete')}&uid="+uid, function(data){
+            if (data) {
+                $('#man_row_'+id).remove();
+                man_tips('取消关注成功', 2, 1);
+            }
+        });
+    });
+});
+</script>
+<input name="page" id="man_page" type="hidden" value="2" />
+<script type="text/javascript" src="{MEMBER_THEME_PATH}sns/sns.js"></script>
+<div class="content clearfix">
+	{template "navigator.html"}
+    <div class="article">
+    	<div class="section">
+            <div class="title"><strong>{if $ta}【{$ta.username}】的粉丝{else}{$meta_name}{/if}</strong></div>
+            <div class="main">
+                <div id="man_body" class="sperson-feedlist">
+                    {template "sns_fans_data.html"}
+                </div>
+                <div class="bk10"></div>
+                <div id="man_loading"></div>
+                <div id="man_loadmore" class="load-more"><a href="javascript:;">查 看 更 多</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{template "footer.html"}

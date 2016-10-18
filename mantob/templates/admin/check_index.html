@@ -1,0 +1,27 @@
+{template header.html}
+<div class="subnav">
+	<div class="content-menu ib-a blue line-x">
+		<a class="on" href="{man_url('check/index')}"><em>{lang('html-533')}</em></a><span>|</span>
+		<a href="{man_url('check/phpinfo')}" target="_blank"><em>{lang('html-534')}</em></a><span>|</span>
+	</div>
+	<div class="bk10"></div>
+	<div class="table-list">
+		<table width="100%" id="man_result">
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+$("#man_result").html("");
+{loop $step $id $name}
+$.ajax({
+    type: "GET",
+    url: "{man_url('check/todo', array('step'=>$id))}&"+Math.random(),
+    contentType: "application/json; charset=utf-8",
+    dataType: "text",
+    success: function (data) {
+        $("#man_result").append(data);
+    }
+});
+{/loop}
+</script>
+{template footer.html}

@@ -1,0 +1,164 @@
+<section>
+    <div class="homepage">
+        <div class="row">
+            <div class="small-12 columns">
+                {list action=module flag=1 module=agenda order=updatetime num=3}
+                <article class="tout tout--hero tout--article">
+                    <a class="tout__link" href="{$t.url}">
+                        {template "data/image.html"}
+                        <div class="tout__details">
+                            <div class="tout__topic caption"></div>
+                            <h3 class="tout__title">{$t.title}</h3>
+                            <div class="tout__meta">
+                                <div class="caption">
+                                    <span class="article__author bold">{$t.author}</span>
+                                    <span>{man_date($t._updatetime,null,'')}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                {/list}
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns tout-list tout-list--grid">
+                <div class="tout-list--grid__container">
+                    {list action=module flag=2 module=agenda order=updatetime num=6}
+                    <article class="tout tout--default tout--article">
+                        <a class="tout__link" href="{$t.url}">
+                            {template "data/image.html"}
+                            <div class="tout__details">
+                                <div class="tout__topic caption"></div>
+                                <h3 class="tout__title">{$t.title}</h3>
+                                <div class="tout__meta">
+                                    <div class="caption">
+                                        <span class="article__author bold">{$t.author}</span>
+                                        <span>{man_date($t._updatetime,null,'')}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    {/list}
+                </div>
+            </div>
+        </div>
+<<<<<<< HEAD
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="bottom-border"></div>
+            </div>
+            <div class="small-12 columns">
+                <div class="strapline">
+                   {man_block(1)}
+                </div>
+            </div>
+            <div class="small-12 columns">
+                <div class="press-release-container">
+                    {list action=module module=press num=1 return=t}
+                    <div class="press-release__content">
+                        <div class="press-release__caption">
+                            <span class="bold">{$ci->get_cache('module-1-press', 'category', $t.catid, 'name')}通稿</span>
+                            <span>{man_fdate($t._updatetime)} 发布</span>
+                        </div>
+                        <a class="press-release__text" href="{$t.url}">{$t.title}</a>
+                    </div>
+                    <div class="press-release__more">
+                        <a class="press-release__trigger" href="{$ci->get_cache('module-1-press', 'category', 1, 'url')}">
+                            <span>所有{$ci->get_cache('module-1-press', 'category', 1, 'name')}</span>
+                            <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="more" />
+                        </a>
+                    </div>
+                    {/list}
+                </div>
+            </div>
+        </div>
+=======
+        
+>>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
+    </div>
+    <div class="highlights-section border-bottom">
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="events-header">
+                    议题表
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 large-8 columns">
+                <div class="gutter-marking"></div>
+                <div class="sbs-section-header">
+                    <span>全球议题</span>
+                </div>
+                {list action=module flag=3 module=agenda order=updatetime num=6}
+                <article class="tout tout--large tout--article">
+                    <a class="tout__link" href="{$t.url}">
+                        {template "data/image.html"}
+                        <div class="tout__details">
+                            <h3 class="tout__title">{$t.title}</h3>
+                            <div class="tout__meta">
+                                <div class="caption">
+                                    <span class="article__author bold">{$t.author}</span>
+                                    <span>{man_date($t._updatetime,null,'')}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                {/list}
+            </div>
+            <div class="small-12 medium-6 large-4 columns">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="sbs-section-header">
+                            <span>地区议题</span>
+                        </div>
+                        {list action=module flag=4 module=agenda order=updatetime num=6}
+                        <article class="tout tout--mini tout--article">
+                            <a class="tout__link" href="{$t.url}">
+                                {template "data/image-tiny.html"}
+                                <div class="tout__details">
+                                    <h3 class="tout__title">{$t.title}</h3>
+                                    <div class="tout__meta">
+                                        <div class="caption">
+                                            <span class="article__author bold"></span>
+                                            <span>10 Aug 2016</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                        {/list}
+                    </div>
+                </div>
+            </div>
+            <div class="small-12 medium-6 large-4 columns">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="sbs-section-header">
+                            <span>行业议题</span>
+                        </div>
+                        {list action=module flag=5 module=agenda order=updatetime num=6}
+                        <article class="tout tout--mini tout--article">
+                            <a class="tout__link" href="{$t.url}">
+                                {template "data/image-tiny.html"}
+                                <div class="tout__details">
+                                    <h3 class="tout__title">{$t.title}</h3>
+                                    <div class="tout__meta">
+                                        <div class="caption">
+                                            <span class="article__author bold"></span>
+                                            <span>25 Jul 2016</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                        {/list}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

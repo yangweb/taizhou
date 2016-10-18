@@ -1,0 +1,27 @@
+<div class="row collapse">
+     <!-- 最新数据 -->
+     {list action=module catid=$catid order=updatetime num=8}
+    <article class="tout tout--mini tout--article">
+        <a class="tout__link" href="{$t.url}" title="{$t.title}">
+            {template "data/image-tiny.html"}
+            <div class="tout__details">
+                <h3 class="tout__title">{man_strcut($t.title, 18)}</h3>
+                <div class="tout__meta">
+                    <div class="caption">
+                        <span class="article__author bold">{$t.author}</span>
+                        <span>{man_date($t._updatetime)}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </article>
+    {/list}                            
+    <div class="further-reading__more">
+        <a href="{MODULE_URL}">
+            <span class="further-reading__more-link">了解更多{MODULE_NAME}</span>
+            <span class="further-reading__more-arrow">
+                 <img src="{HOME_THEME_PATH}build/imgs/further-reading-arrow-984f0b2d46101716e9c621b9fc9e0192e3e5be4e69b301ddf6e866ef4108d8db.svg" alt="Further" /> 
+             </span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{loop $list $t}
+<tr id="man_row_{$t.id}">
+	<td class="algin_c"><a href="{$t.url}" title="{$t.title}" target="_blank">{$t.cid}</a></td>
+	<td class="algin_l"><div class="man_title">{man_keyword_highlight($t.subject, $get.kw)}</div></td>
+	<td class="algin_l">{man_date($t.inputtime, '', 'red')}</td>
+	<td class="algin_l">
+	<a href="javascript:;" onclick="man_dialog_show('查看', '{man_member_url(APP_DIR.'/'.$this->ci->router->class.'/show', array('id' => $t.id))}')">查看</a>
+    {if $isedit}
+    &nbsp;<a href="{man_member_url(APP_DIR.'/'.$this->ci->router->class.'/edit', array('id' => $t.id))}">修改</a>
+    {/if}
+	&nbsp;<a href="javascript:;" onclick="man_delete('{$t.id}')">删除</a>
+    </td>
+</tr>
+{/loop}

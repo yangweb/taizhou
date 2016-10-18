@@ -1,0 +1,21 @@
+<section>
+    <div class="page list-group">
+        <div class="row">
+            <div class="columns">
+                <h1 class="events-header">{MODULE_NAME}回顾</h1>
+                <div class="tout-list tout-list--grid">
+                    <div class="tout-list--grid__container">
+                        {php $sqlold = 'select * from @#1_events where id>1 order by id desc limit 10';
+                         $now = time();
+                        }
+                        {list action=sql sql='select * from @#1_events where starttime<$now order by id desc limit 10'  page=1  }
+                         {template "article-info.html"}
+                        {/list}
+                    </div>
+                </div>
+            </div>
+           {template "layout/pagination.html"}
+        </div>
+    </div>
+
+</section>

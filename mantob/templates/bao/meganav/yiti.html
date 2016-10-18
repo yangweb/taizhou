@@ -1,0 +1,43 @@
+<div class="meganav-content" data-pane="agenda">
+    {template "layout/description.html"}
+    <div class="row meganav-agenda-subpane" data-subpane="global">
+        <div class="columns">
+            <div class="tout-list tout-list--grid tout-list--grid-">
+                <div class="tout-list--grid__container">
+                        {list action=module  module=agenda num=3 catid=5 return=t}
+                        {template "layout/nav-article.html"}
+                        {/list}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row meganav-agenda-subpane" data-subpane="regional">
+        <div class="columns">
+            <div class="tout-list tout-list--grid tout-list--grid-">
+                <div class="tout-list--grid__container">
+                        {list action=module  module=agenda num=3 catid=6  return=t}
+                        {template "layout/nav-article.html"}
+                        {/list}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row meganav-agenda-subpane" data-subpane="industry">
+        <div class="columns">
+            <div class="tout-list tout-list--grid tout-list--grid-">
+                <div class="tout-list--grid__container">
+                        {list action=module  module=agenda num=3 catid=7 return=t}
+                        {template "layout/nav-article.html"}
+                        {/list}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="meganav-section-end">
+                <a href="{SITE_URL}agenda"> <span>更多</span> <img src="{HOME_THEME_PATH}build/imgs/link-arrow-9adfe464cd987bc5b3097b1218678552fcdd94a3e6cb7b3664bd1f75205873cc.svg" alt="Link arrow" /> </a>
+            </div>
+        </div>
+    </div>
+</div>

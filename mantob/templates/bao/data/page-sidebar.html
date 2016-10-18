@@ -1,0 +1,33 @@
+<div class="page__sidebar">
+    <nav class="about-page__nav">
+        <ul class="page__items">
+            <li class="list-group__header"> <span>{$ci->get_cache('page-1', 'data', 'index', 1, 'name')}</span> </li>
+            {list action=page module=index pid=1}
+            <li class="page__item {if ($t.child &&  (strpos($t.childids, $id))) || ($t.child && $id == $t.id) }page__item--active-parent{/if}">
+                {if ($id == $t.id) ||($id && strpos($t.childids, $id)) }
+                <div class="{if $t.child}page__item--active-container{/if}">
+                    {if $id == $t.id}
+                    <div class="bold">
+                        {$t.name}
+                    </div>
+                    {else}
+                    <a class="page__item" href="{$t.url}">{$t.name}</a> {/if}
+                </div>
+                {else}
+                <a class="page__item" href="{$t.url}">{$t.name}</a> {/if} {if ($t.child && (strpos($t.childids, $id))) || ($t.child && $id == $t.id) }
+                <ul class="page__items">
+                    {list action=page module=index pid=$t.id return=t2}
+                    <li class="page__item">
+                        <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="" /> {if $t2.id == $id}
+                        <span class="bold">{$t2.name}</span> {else}
+                        <a href="{$t2.url}">{$t2.name}</a> {/if}
+                    </li>
+                    {/list}
+                </ul>
+                {/if}
+            </li>
+
+            {/list}
+        </ul>
+    </nav>
+</div>

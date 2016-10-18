@@ -1,0 +1,53 @@
+<div class="meganav-content" data-pane="challenges">
+    <div class="meganav-content__description">
+        <div class="row">
+            <div class="small-12 columns">
+               {man_block(7)}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-4 columns">
+            <div class="gutter-marking"></div>
+            <div class="mega-list-group__header">
+                <span class="list-group__title">“共同促进行业健康发展”行动倡议</span>
+            </div>
+            <ul class="mega-list-group">
+                {list action=module  module=challenges  catid=2  return=t}
+                <li class="mega-list-group__item"> <a href="{$t.url}">{$t.title}</a> </li>
+                {/list}
+            </ul>
+        </div>
+        <div class="small-8 columns">
+            <div class="mega-list-group__header">
+                <span class="list-group__title">最新加入</span>
+            </div>
+            <div class="row">
+                <div class="columns">
+                    <div class="tout-list tout-list--grid tout-list--grid-x2">
+                        <div class="tout-list--grid__container">
+                            {list action=module flag=1 module=challenges order=updatetime num=10}
+                            <article class="tout tout--default tout--project">
+                                <a class="tout__link" href="{$t.url}" title="{$t.title}">
+                                    {template "data/image.html"}
+                                    <div class="tout__details">
+                                        <div class="tout__topic caption"></div>
+                                        <h3 class="tout__title">{$t.title}</h3>
+                                    </div>
+                                </a>
+                            </article>
+                            {/list}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="meganav-section-end">
+                <a href="{$ci->get_cache('module-1-challenges', 'category', 3, 'url')}"> <span>更多</span> <img src="{HOME_THEME_PATH}build/imgs/link-arrow-9adfe464cd987bc5b3097b1218678552fcdd94a3e6cb7b3664bd1f75205873cc.svg" alt="Link" /> </a>
+            </div>
+        </div>
+    </div>
+</div>

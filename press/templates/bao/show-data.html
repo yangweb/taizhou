@@ -1,0 +1,57 @@
+<section>
+    <div class="row">
+        <div class="small-12 columns">
+            <ul class="topic-list">
+                <li class="topic-list__item"><a href="{MODULE_URL}">{MODULE_NAME}</a></li>
+                <li class="topic-list__item">
+                    <a href="{$ci->get_cache('module-1-press', 'category', $catid, 'url')}">
+                {$ci->get_cache('module-1-press', 'category', $catid, 'name')}
+                    </a>
+                </li>
+            </ul>
+            <h1 class="article__headline">{$title}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <div class="article-details--small">
+                <p>{man_date($_updatetime,NULL,'')}</p>
+            </div>
+            <div class="article-details--large">
+                <div class="article-details__meta">
+                    <div class="article-details__header">
+                        已发布
+                    </div>
+                    <div>{man_date($_updatetime,NULL,'')}</div>
+                </div>
+                <div class="article-details__meta">
+                    <div class="article-details__header">
+                        分享
+                    </div>
+                    <div>
+                        <a href="" class="social-share--weibo js-social-share" target="_blank"></a>
+                        <a href="" class="social-share--linkedin js-social-share" target="_blank"></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="article-show-container">
+            {$content}
+            <div class="post-article">
+                <div class="post-article__share">
+                    分享
+                    <div>
+                        <a href="" class="social-share--weibo js-social-share" target="_blank"></a>
+                        <a href="" class="social-share--linkedin js-social-share" target="_blank"></a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-article">
+                <div class="caption">{man_block(3)}</div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,9 @@
+{loop $list $t}
+{php $c=man_string2array($t['content']);$back=man_string2array($t['backinfo']);}
+<tr>
+	<td class="algin_r"><input type="checkbox" value="{$t['id']}" class="man_select" name="ids[]" /></td>
+	<td class="algin_l" title="{$c['title']}"><div class="man_title">{$c['title']}</div></td>
+	<td class="algin_l">{man_date($t['inputtime'], '', 'red')}</td>
+	<td class="algin_l"><a href="{man_member_url(APP_DIR.'/back/edit', array('id'=>$t['id']))}">修改/查看</a></td>
+</tr>
+{/loop}

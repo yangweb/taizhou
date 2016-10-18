@@ -1,0 +1,42 @@
+{template header.html}
+<script type="text/javascript">
+$(function(){
+	$("#man_loadmore a").click(function(){
+		var page = $("#man_page").val();
+		$("#man_loading").html("<div style='padding:30px;text-align:center;'><img src='{MEMBER_THEME_PATH}images/loading.gif' /></div>");
+		$.get("{$moreurl}", {page:page}, function(data){
+			if (data != "null") {
+				$("#man_body").append(data);
+				$("#man_page").val(Number(page) + 1);
+			}
+			$("#man_loading").html("&nbsp;");
+		});
+	});
+});
+</script>
+<input name="page" id="man_page" type="hidden" value="2" />
+<div class="content clearfix">
+	{template navigator.html}
+    <div class="article">
+        <div class="section">
+            <div class="title"><strong>{$meta_name}</strong></div>
+            <div class="main man_table">
+				<table style="table-layout:fixed;margin-bottom: 0;">
+				<thead>
+					<tr>
+						<th style="width:120px;" class="algin_l">&nbsp;时间</th>
+						<th style="width:100px;" class="algin_l">变更值</th>
+						<th class="algin_l">操作</th>
+					</tr>
+				</thead>
+				<tbody id="man_body">
+				{template score_data.html}
+				</tbody>
+				</table>
+				<div id="man_loading" style="marign-top:10px;">&nbsp;</div>
+                <div id="man_loadmore" class="load-more"><a href="javascript:;">查 看 更 多</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{template footer.html}

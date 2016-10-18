@@ -1,0 +1,257 @@
+
+ /**
+ * mantob Website Management System
+ *
+ * @since		version 2.0.1
+ * @author		mantob <mantob@gmail.com>
+ * @license     http://www.mantob.com/license
+ * @copyright   Copyright (c) 2011 - 9999, mantob.Com, Inc.
+ */
+ 
+function man_tips(msg, time, mark) {
+	art.dialog.tips(msg, time, mark);
+}
+
+function man_confirm_url(title, url) {
+	art.dialog.confirm(title, function() {
+		man_tips(lang['waiting'], 3, 1);
+		window.location.href = url;
+		return true;
+	});
+}
+
+function man_dialog_msg(msg) {
+	var throughBox = art.dialog.through;
+	throughBox({
+		content: msg,
+		lock: true,
+		opacity: 0.1
+	});
+}
+
+function man_add_favorite(url, title) {
+	try {
+		window.external.addFavorite(url, title);
+	} catch (e){
+		try {
+			window.sidebar.addPanel(title, url, '');
+        	} catch (e) {
+			man_dialog_msg(fc_lang[28]);
+		}
+	}
+}
+
+function man_set_homepage(url) {
+	if ($.browser.msie) {
+		document.body.style.behavior = 'url(#default#homepage)';
+		document.body.setHomePage(url);
+	} else {
+		man_tips(fc_lang[29], 3);
+	}
+}
+
+function man_remove_file(name, id) {
+	art.dialog.confirm(lang['confirm'], function() {
+		var fileid = $('#fileid_'+name+'_'+id).val();
+		var value = $('#man_'+name+'_del').val();
+		$('#files_'+name+'_'+id).remove();
+		$('#man_'+name+'_del').val(value+'|'+fileid);
+	});
+}
+
+function man_edit_file(url, name, id) {
+	art.dialog.open(url, {
+		title: lang['upload'],
+		opacity: 0.1,
+		width: 550,
+		height:400,
+		ok: function () {
+			var iframe = this.iframe.contentWindow;
+			if (!iframe.document.body) {
+                man_tips("iframe loading")
+				return false;
+			};
+			var value = iframe.document.getElementById("att-status").innerHTML;
+			if (value == "" || value == undefined) {
+                man_tips(lang['notselectfile']);
+				return false;
+			} else {
+				var file = value.split("|");
+				var info = file[1].split(",");
+				$("#fileid_"+name+"_"+id).val(info[0]); // id或者引用文件地址
+				$('#span_'+name+'_'+id).html("<a href=\"javascript:;\" onclick=\"man_show_file_info(\'"+info[0]+"\')\"><img align=\"absmiddle\" src="+info[1]+"></a><div class=\"onCorrect\">"+info[2]+"&nbsp;</div>"); // 扩展名图标
+				$("."+name+"_"+id+"_pan input").val("");
+				return true;
+			}
+		},
+		cancel: true
+	});
+}
+
+// 上传多文件
+function man_upload_files(name, url, pan, count) {
+	var size = $('#'+name+'-sort-items li').size();
+	var total = count - size;
+	pan = decodeURIComponent(pan);
+	art.dialog.open(url+'&count='+total, {
+		title: lang['upload'],
+		opacity: 0.1,
+		width: 550,
+		height:400,
+		ok: function () {
+			var iframe = this.iframe.contentWindow;
+			if (!iframe.document.body) {
+                man_tips("iframe loading")
+				return false;
+			};
+			var value = iframe.document.getElementById("att-status").innerHTML;
+			if (value == "" || value == undefined) {
+				return false;
+			} else {
+				var file = value.split("|");
+				for (var i in file) {
+					var filepath = file[i];
+					var id = parseInt(size)+parseInt(i);
+					if (filepath) {
+						var info = filepath.split(",");
+						if ($('#'+name+'-sort-items [value="'+info[0]+'"]').length>0) {
+//							man_tips(fc_lang[27]);
+//							return false;
+//		
+}
+						if (!info[3]) info[3] = info[0];
+						info[3] = man_remove_ext(info[3]);
+						var c ='';
+						c += '<li id="files_'+name+'_'+id+'" list="'+id+'" style="cursor:move;"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>';
+						c += '<td width="80" style="text-align:right">';
+						c += '<a href="javascript:;" onclick="man_remove_file(\''+name+'\',\''+id+'\')">';
+						c += '<img align="absmiddle" src="'+homeurl+'mantob/statics/images/b_drop.png"></a>';
+						c += '</td><td>';
+						c += '<input type="hidden" value="'+info[0]+'" name="data['+name+'][file][]" id="fileid_'+name+'_'+id+'" />';
+						c += '<input type="hidden" value="" id="pan_'+name+'_'+id+'" name="data['+name+'][pan][]" />';
+						c += '<input type="text" class="input-text" style="width:300px;" value="'+info[3]+'" name="data['+name+'][title][]" />';
+						c += '<span id="span_'+name+'_'+id+'">&nbsp;';
+						c += '<a href="javascript:;" onclick="man_show_file_info(\''+info[0]+'\')">';
+						c += '<img align="absmiddle" src="'+info[1]+'">&nbsp;';
+						c += '<div class="onCorrect">'+info[2]+'&nbsp;</div></a></span></td><tr>';
+						if (pan != "undefined") {
+							var _pan = pan.replace(/\+/g, ' ');
+							_pan = _pan.replace(/{id}/g, id);
+							c += _pan;
+						}
+						c += '</table></li>';
+						$('#'+name+'-sort-items').append(c);
+					}
+				}
+				return true;
+			}
+		},
+		cancel: true
+	});
+}
+
+// 会员登录
+function man_login() {
+	art.dialog.open(memberpath+"index.php?c=login&m=ajax", {
+		title: lang['login'],
+		opacity: 0.1,
+		lock: true,
+		width: 380,
+		height:350,
+		ok: function () {
+			window.location.reload(true);
+		},
+		cancel: true
+	});
+}
+
+// 聊天窗口
+function man_chat(_this) {
+	var uid = $(_this).attr("uid");
+	var online = $(_this).attr("online");
+	var username = $(_this).attr("username");
+	if (online == 1) {
+		var title = '正在与'+username+'聊天中... [在线]';
+	} else {
+		var title = '正在与'+username+'聊天中... [离线]';
+	}
+	var throughBox = $.dialog.through;
+	var man_dialog = throughBox({id: 'man_webchat', title: title, padding:0,width: 420,height: 480});
+	var url = memberpath+"index.php?c=pm&m=webchat&username="+username+"&uid="+uid+"&online="+online+"&"+Math.random();
+	$.ajax({type: "GET", url:url, dataType:'jsonp',jsonp:"callback",async: false,
+	    success: function (text) {
+			man_dialog.content(text.html);
+	    },
+	    error: function(HttpRequest, ajaxOptions, thrownError) {
+			man_dialog.close();
+			man_login();
+		}
+	});
+}
+
+// 上传单文件
+function man_upload_file(name, url) {
+	art.dialog.open(url, {
+		title: lang['upload'],
+		opacity: 0.1,
+		width: 550,
+		height:400,
+		ok: function () {
+			var iframe = this.iframe.contentWindow;
+			if (!iframe.document.body) {
+                man_tips("iframe loading")
+				return false;
+			};
+			var value = iframe.document.getElementById("att-status").innerHTML;
+			if (value == "" || value == undefined) {
+                man_tips(lang['notselectfile']);
+				return false;
+			} else {
+				var file = value.split("|");
+				var info = file[1].split(",");
+				var finfo = info[3]+" ("+info[2]+")";
+				if (!info[3]) {
+					finfo = "";
+				}
+				$("#man_"+name).val(info[0]); // id或者引用文件地址
+				$("#show_"+name).html("<a href=\"javascript:;\" onclick=\"man_show_file_info(\'"+info[0]+"\')\"><img align=\"absmiddle\" src="+info[1]+"><div class=\"onCorrect\">"+finfo+"&nbsp;</div></a>"); // 扩展名图标
+				return true;
+			}
+		},
+		cancel: true
+	});
+}
+
+function man_delete_file(name) {
+    art.dialog.confirm(lang['confirm'], function() {
+        $("#man_"+name).val("");
+        $("#show_"+name).html("");
+    });
+}
+
+function man_show_file_info(name) {
+	var throughBox = $.dialog.through;
+	var man_dialog = throughBox({title: lang['fileinfo']});
+	var url = memberpath+"index.php?c=api&m=fileinfo&name="+name+"&rand="+Math.random();
+	// ajax调用窗口内容
+	$.ajax({type: "GET", url:url, dataType:'text',
+	    success: function (text) {
+			var win = $.dialog.top;
+			man_dialog.content(text);
+	    },
+	    error: function(HttpRequest, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + HttpRequest.statusText + "\r\n" + HttpRequest.responseText);
+		}
+	});
+}
+
+// 文件上传
+function man_upload(name, ext, size, count) {
+	alert('此函数已废弃');return;
+}
+
+// 去掉扩展名
+function man_remove_ext(str){
+	var reg = /\.\w+$/;
+	return str.replace(reg,'');
+} 

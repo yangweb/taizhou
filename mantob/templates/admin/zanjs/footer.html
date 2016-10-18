@@ -1,0 +1,50 @@
+<!-- BEGIN FOOTER -->
+<!-- BEGIN PRE-FOOTER -->
+<div class="page-prefooter">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-3 col-sm-6 col-xs12 footer-block">
+                <h2>全站搜索</h2>
+                <div class="subscribe-form">
+                    <form class="search-form" method="get" target="_blank" action="{SITE_URL}index.php">
+                        <input name="c" type="hidden" value="so">
+                        <input name="module" type="hidden" value="{MOD_DIR}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="输入搜索关键字" name="keyword">
+                            <span class="input-group-btn">
+                                        <button class="btn" type="submit">搜索</button>
+                                    </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<!-- END PRE-FOOTER -->
+<!-- BEGIN INNER FOOTER -->
+<div class="page-footer">
+    <div class="container">
+        <div class="row">
+           
+            {if IS_PC}
+            <div class="col-md-9 text-right">
+                {list action=navigator type=3}
+                <a {if $key>=$count-1}style="border:none"{/if} href="{$t.url}" title="{$t.title}" {if $t.target}target="_blank"{/if}>{$t.name}</a>
+                {/list}
+            </div>
+            {/if}
+        </div>
+
+    </div>
+</div>
+<div class="scroll-to-top">
+    <i class="icon-arrow-up"></i>
+</div>
+<!-- END INNER FOOTER -->
+<!-- END FOOTER -->
+</body>
+
+</html>

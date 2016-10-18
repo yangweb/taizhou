@@ -1,0 +1,66 @@
+<div class="meganav-content" data-pane="events">
+    <div class="meganav-content__description">
+        <div class="row">
+            <div class="small-12 columns">
+                {man_block(5)}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">
+            <div class="mega-list-group__header">
+                <span>会议预告</span>
+            </div>
+            <div class="mega-event-summary">
+                <div class="gutter-marking"></div>
+                {list action=module flag=2 module=events order=updatetime num=1}
+                <article class="tout tout--default tout--event">
+                    <a class="tout__link" href="{$t.url}">
+                        {template "data/image.html"}
+                         <div class="tout__details">
+                         <h3 class="tout__title">{$t.title}</h3>
+                         <div class="tout__meta">
+                            <div class="caption">
+                                <span>{man_date($t._starttime)}</span>
+                                <span>{$t.address}</span>
+                            </div>
+                         </div>
+                    </div>
+                    </a>
+                </article>
+                {/list}
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <div class="mega-list-group__header">
+                <span>会议回顾</span>
+            </div>
+            {list action=module flag=3 module=events order=updatetime num=4}
+            <article class="tout tout--mini tout--event">
+                <a class="tout__link" href="{$t.url}">
+                    <figure class="placeholder tiny">
+                        <img class="image" alt="" src="{man_thumb($t.thumb)}" />
+                        <img class="tiny-fallback" src="{man_thumb($t.thumb,97,72)}" alt="{$t.title}" />
+                    </figure>
+                    <div class="tout__details">
+                        <h3 class="tout__title">{$t.title}</h3>
+                        <div class="tout__meta">
+                            <div class="caption">
+                                <span>{man_date($t._starttime)}</span>
+                                <span>{$t.address}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+            {/list}
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="meganav-section-end">
+                <a href=""> <span>更多</span> <img src="{HOME_THEME_PATH}build/imgs/link-arrow-9adfe464cd987bc5b3097b1218678552fcdd94a3e6cb7b3664bd1f75205873cc.svg" alt="Link" /> </a>
+            </div>
+        </div>
+    </div>
+</div>

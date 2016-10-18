@@ -1,0 +1,54 @@
+<link href="{MEMBER_URL}statics/OAuth/OAuth.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.man_userinfo{ font-family:"微软雅黑";}
+.man_userinfo .oauth_login{ float:right;}
+.man_userinfo .drlogin{ float:right;}
+.man_userinfo .drlogin a { margin:0; padding:0 3px;}
+</style>
+<div class="man_userinfo">
+{if $member}
+Hello,{$member.username}&nbsp;&nbsp;
+<!-- <a href="{MEMBER_URL}">会员中心</a>&nbsp;&nbsp;
+<a href="{MEMBER_URL}index.php?c=pm">{if $newpm}<img src="{MEMBER_THEME_PATH}images/new_pm.gif" align="absmiddle" style="margin-right:3px;" />{/if}短消息</a>&nbsp;&nbsp;
+<a href="{MEMBER_URL}index.php?c=notice"><img id="man_notece_img" src="{MEMBER_THEME_PATH}images/notice.gif" align="absmiddle" style="margin-right:3px;display:none" />提醒</a>&nbsp;&nbsp; -->
+<a href="{MEMBER_URL}index.php?c=login&m=out">Out</a>
+{else}
+    <a href="javascript:;" id="tanCReg">Register</a>&nbsp;/
+            <a href="javascript:;" id="tanCLogin">Login</a>
+{/if}
+</div>
+<script language="javascript">
+
+var man_url = "{MEMBER_URL}index.php?c=api&m=notice&"+Math.random();
+var man_step = 0;
+var man_callbacktitle = "【新提醒】"+document.title;
+var man_caltitle = "【　　　】"+document.title;
+
+$.ajax({type: "GET", url:man_url, dataType:'jsonp',jsonp:"callback",async: false,
+	success: function (data) {
+		if (data.status) {
+			$("#man_notece_img").show();
+			man_flash_title();
+		} else {
+			$("#man_notece_img").hide();
+		}
+	},
+	error: function(HttpRequest, ajaxOptions, thrownError) {
+		
+	}
+});
+
+function man_flash_title() {
+	man_step++;
+	if (man_step==3) {
+		man_step=1;
+	}
+	if (man_step==1) {
+		// document.title=man_callbacktitle;
+	}
+	if (man_step==2) {
+		// document.title=man_caltitle;	
+	}
+	// setTimeout("man_flash_title()", 500);
+}
+</script>

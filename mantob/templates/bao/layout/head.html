@@ -1,0 +1,44 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN" build="Julian">
+<head>
+<title>{$meta_title}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+<meta property="og:title" content="{$meta_title}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mu.gg/" />
+<meta property="og:description" content="{$meta_keywords}" />
+<meta property="og:site_name" content="{$meta_title}" />
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="{$meta_keywords}" />
+<meta name="description" content="{$meta_description}" />
+<meta name="twitter:title" content="{$meta_title}" />
+<meta name="twitter:card" content="Julian" />
+<meta name="twitter:url" content="https://mu.gg/" />
+{list action=navigator type=0 id=2}
+<meta property="og:image" content="{man_thumb($t.thumb)}" />
+<meta name="twitter:image" content="{man_thumb($t.thumb)}" />
+<link rel="icon" href="{man_thumb($t.thumb)}" type="image/x-icon" />
+<link rel="apple-touch-icon" type="image/png" href="{man_thumb($t.thumb)}" sizes="144x144" />
+{/list}
+<meta name="twitter:description" content="{$meta_description}" />
+<link rel="stylesheet" media="all" href="{HOME_THEME_PATH}build/css/application.css" />
+<link rel="stylesheet" media="all" href="{HOME_THEME_PATH}build/css/app.css" />
+<link rel="stylesheet" media="print" href="{HOME_THEME_PATH}build/css/print.css" />
+<link rel="canonical" href="https://mu.gg/" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="https://chuihu.com/feed" />
+<script src="{HOME_THEME_PATH}build/js/application.js"></script>
+<script src="{HOME_THEME_PATH}build/js/app.js"></script>
+<script>
+    var siteUrl = '{SITE_URL}',
+        md5 = '{md5(SYS_KEY)}';
+    
+</script>
+{list action=navigator type=0 id=3}
+<link rel="icon" type="image/png" href="{man_thumb($t.thumb)}" sizes="192x192" />
+{/list}
+</head>
+<body>
+{template "layout/share.html"}
