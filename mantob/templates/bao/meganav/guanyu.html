@@ -19,12 +19,12 @@
             </ul>
         </div>
         <div class="small-8 columns">
-             {php $imgnav1 = $ci->get_cache('page-1', 'data', 'index', 8, 'thumb');
-                                 $imgnav2 = $ci->get_cache('page-1', 'data', 'index', 7, 'thumb');
-                                 $navurl1 = $ci->get_cache('page-1', 'data', 'index', 8, 'url');
-                                 $navurl2 = $ci->get_cache('page-1', 'data', 'index', 7, 'url');
-                                 $navname1 = $ci->get_cache('page-1', 'data', 'index', 8, 'name');
-                                 $navname2 = $ci->get_cache('page-1', 'data', 'index', 7, 'name');
+             {php $imgnav1 = $ci->get_cache('page-1', 'data', 'index', 2, 'thumb');
+                                 $imgnav2 = $ci->get_cache('page-1', 'data', 'index', 5, 'thumb');
+                                 $navurl1 = $ci->get_cache('page-1', 'data', 'index', 2, 'url');
+                                 $navurl2 = $ci->get_cache('page-1', 'data', 'index', 5, 'url');
+                                 $navname1 = $ci->get_cache('page-1', 'data', 'index', 2, 'name');
+                                 $navname2 = $ci->get_cache('page-1', 'data', 'index', 5, 'name');
                             }
             <div class="mega-list-group__header">
                 <span class="list-group__title">{$navname1}</span>
@@ -41,7 +41,7 @@
                                         <img class="tiny-fallback" src="{man_thumb($imgnav1,97,72)}" alt="" />
                                     </figure>
                                     <div class="tout__details">
-                                        <h3 class="tout__title">{$navname1}2</h3>
+                                        <h3 class="tout__title">{$navname1}</h3>
                                     </div>
                                 </a>
                             </article>

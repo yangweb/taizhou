@@ -22,6 +22,25 @@
                         <span class="bold">{$t2.name}</span> {else}
                         <a href="{$t2.url}">{$t2.name}</a> {/if}
                     </li>
+                    {list action=page module=index pid=$t2.id return=t3}
+                        <li class="page__item">
+                            <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="" />
+                            <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="" />
+                             {if $t3.id == $id}
+                            <span class="bold">{$t3.name}</span> {else}
+                            <a href="{$t3.url}">{$t3.name}</a> {/if}
+                        </li>
+                        {list action=page module=index pid=$t3.id return=t4}
+                            <li class="page__item">
+                                <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="" />
+                                <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="" />
+                                <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="" />
+                                {if $t4.id == $id}
+                                <span class="bold">{$t4.name}</span> {else}
+                                <a href="{$t4.url}">{$t4.name}</a> {/if}
+                            </li>
+                        {/list}
+                    {/list}
                     {/list}
                 </ul>
                 {/if}
